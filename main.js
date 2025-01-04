@@ -1,6 +1,6 @@
 const {
   app,
-  BrowserWindow,
+  BrowserWindow, ipcMain
 } = require('electron')
 const electron = require('electron')
 const path = require('path');
@@ -111,9 +111,18 @@ function createWindow () {
   })
 
   OpenDevicesFunc()
-  let tData = XPlaneLegacyClient.mydata;
+  let tData = 20;
+  
   console.log(tData);
-   F16ICP.init(WWTHID.WWTHID_JSAPI,tData)
+  F16ICP.init(WWTHID.WWTHID_JSAPI,tData)
+  F16ICP.init(WWTHID.WWTHID_JSAPI,tData+5)
+  F16ICP.init(WWTHID.WWTHID_JSAPI,tData+15)
+  
+  ipcMain.on('channel-name', (event, data) => {
+  console.log('Received data from renderer:', data);
+   F16ICP.init(WWTHID.WWTHID_JSAPI,data);
+});
+  
 }
 
 

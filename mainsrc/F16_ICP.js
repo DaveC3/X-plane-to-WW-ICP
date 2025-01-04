@@ -1,4 +1,4 @@
-
+const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitTimeInMs));
 var NowAircraft;
 var g_DCSData;
 var ICPDevs;
@@ -18,12 +18,16 @@ module.exports.init = function (_WWTHIDJSAPI, XpData) {
     g_XpData = XpData
     WWTHIDJSAPI = _WWTHIDJSAPI;
 	WWTHIDJSAPI.ICPDrawStart();
-	console.log(g_XpData);
 	WWTHIDJSAPI.ICPDraw(0, 0,  "COM1     " + g_XpData, false, "DCS");
 	WWTHIDJSAPI.ICPDraw(0, 15, "NAV1     " + "117.50", false, "DCS");
 	WWTHIDJSAPI.ICPDraw(0, 30, "ALTITUDE " + "13333", false, "DCS");
 	WWTHIDJSAPI.ICPDraw(0, 45, "AIRSPEED " + "222", false, "DCS");
 	WWTHIDJSAPI.ICPDrawEnd(); 
+	console.log('end od init');
+
+
+
+	
 	
 /*   setInterval(() => {
     WWTHIDJSAPI.ICPDrawStart();
@@ -36,18 +40,29 @@ module.exports.init = function (_WWTHIDJSAPI, XpData) {
 
 
 
-module.exports.dispDat=function (_WWTHIDJSAPI, XpData) {
-	console.log(XpData);
-    g_XpData1 = XpData
+module.exports.dispDat = function (_WWTHIDJSAPI, XpData) {
     WWTHIDJSAPI = _WWTHIDJSAPI;
 	WWTHIDJSAPI.ICPDrawStart();
-	console.log('got here');
-	WWTHIDJSAPI.ICPDraw(0, 0,  "COM1     " + g_XpData1, false, "DCS");
-	WWTHIDJSAPI.ICPDraw(0, 15, "NAV1     " + "120.50", false, "DCS");
-	WWTHIDJSAPI.ICPDraw(0, 30, "ALTITUDE " + "222222", false, "DCS");
-	WWTHIDJSAPI.ICPDraw(0, 45, "AIRSPEED " + "111", false, "DCS");
-	console.log('now here also');
+	WWTHIDJSAPI.ICPDraw(0, 0,  'test', false, "DCS");
 	WWTHIDJSAPI.ICPDrawEnd(); 
 	console.log('should have worked :-( ');
+	end();
 }
 
+function end(){
+	WWTHIDJSAPI.ICPDrawStart();
+	WWTHIDJSAPI.ICPDraw(0, 15, "NAV1" ,false, "DCS");
+	WWTHIDJSAPI.ICPDrawEnd();
+}
+/* var CB_addCommon = (msg) => {
+  const data = msg;
+    WWTHIDJSAPI.ICPDrawStart();
+
+	WWTHIDJSAPI.ICPDraw(0, 1,  "1234", false, "DCS");
+      
+      
+    });
+
+    WWTHIDJSAPI.ICPDrawEnd();
+
+} */

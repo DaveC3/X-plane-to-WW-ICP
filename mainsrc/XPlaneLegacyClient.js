@@ -4,7 +4,7 @@ const WWTHID = require('../mainsrc/WWTHID')
 const F16ICP = require('../mainsrc/F16_ICP.js');
 module.exports.WWTHID_JSAPI = WWTHID_JSAPI;
 const path = require('path');
-//const mainWin = require('../main.js');
+const { ipcRenderer } = require('electron');
 
 			
 			
@@ -201,8 +201,9 @@ module.exports = class XPlaneClient {
               // Store old value so we can detect changes to the value
               dataRef.value = drefFltValue;
 			  var mydata =  drefFltValue;
+			 sendDataToMain(mydata);
 			 //mainWin.OpenDevicesFunc();
-			  F16ICP.dispDat(WWTHID.WWTHID_JSAPI.CB_addCommon,mydata); 
+			  //F16ICP.init(WWTHID.WWTHID_JSAPI,mydata); 
 			  console.log(i + " " + mydata);
               if (dataRef.callback !== undefined) {
                 console.log('calling callback');
@@ -223,6 +224,7 @@ module.exports = class XPlaneClient {
     });
   }
 };
-function sendCommandToMain(command, ...args) {
-  ipcRenderer.send(command, ...args);
+
+function sendDataToMain(data) {
+  ipcRenderer.send('channel-name', data);
 }
