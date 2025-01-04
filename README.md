@@ -1,6 +1,5 @@
 Project Overview:
-Many thanks to  llamaXc (https://github.com/llamaXc) with out whitch I could have never finished this roject
-llamaXc
+Many thanks to  llamaXc (https://github.com/llamaXc) with out whitch I could have never finished this poject.
 
 
 Build Steps if you want to tweak and build on this project:
