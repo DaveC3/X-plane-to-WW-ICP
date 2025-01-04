@@ -105,4 +105,10 @@ wss1.on('close', function close() {
 server.listen(8080);
 
  xPlane.requestDataRef('sim/cockpit/radios/com1_freq_hz', 1);
+ xPlane.requestDataRef('sim/cockpit/radios/com1_stdby_freq_hz', 1);
  xPlane.requestDataRef('sim/cockpit/radios/nav1_freq_hz', 1);
+ xPlane.requestDataRef('sim/cockpit/radios/nav1_stdby_freq_hz', 1);
+ xPlane.requestDataRef('sim/cockpit2/gauges/indicators/heading_electric_deg_mag_pilot', 1);
+ xPlane.requestDataRef('sim/cockpit2/gauges/indicators/altitude_ft_pilot', 1);
+ xPlane.requestDataRef('sim/cockpit2/gauges/indicators/airspeed_kts_pilot', 1);
+ xPlane.requestDataRef('sim/flightmodel/position/groundspeed', 1);

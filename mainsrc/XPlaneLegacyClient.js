@@ -25,6 +25,7 @@ const endianNess = () => {
 const BIG_ENDIAN = endianNess === 'Big Endian';
 
 let client;
+let mydata = [];
 
 module.exports = class XPlaneClient {
   constructor(settings) {
@@ -190,20 +191,14 @@ module.exports = class XPlaneClient {
             // Only propagate the dataref value if it has changed from what it was before
             // TODO: make it possible to request all events even if not changed (more overhead)
             if (dataRef.value !== drefFltValue) {
-              if (this.debug) {
-/*                 console.log(
-                  `[${i + 1}/${numrefs}] new value for dataRef ${
-                    dataRef.dataRef
-                  } is ${drefFltValue}`,
-                ); */
-              }
+              mydata[i] =  drefFltValue;
+
+
 
               // Store old value so we can detect changes to the value
-              dataRef.value = drefFltValue;
-			  var mydata =  drefFltValue;
-			 sendDataToMain(mydata);
-			 //mainWin.OpenDevicesFunc();
-			  //F16ICP.init(WWTHID.WWTHID_JSAPI,mydata); 
+              //dataRef.value = drefFltValue;
+			 // var mydata =  drefFltValue;
+			 //sendDataToMain(mydata);
 			  console.log(i + " " + mydata);
               if (dataRef.callback !== undefined) {
                 console.log('calling callback');
@@ -220,11 +215,20 @@ module.exports = class XPlaneClient {
 
           offset += 8;
         }
+		mydata[0] = ((mydata[0]*10)/1000).toFixed(3);
+        mydata[1] = ((mydata[1]*10)/1000).toFixed(3);
+        mydata[2] = ((mydata[2]*10)/1000).toFixed(3);
+        mydata[3] = ((mydata[3]*10)/1000).toFixed(3);
+        mydata[4] = Math.trunc(mydata[4]);
+        mydata[5] = Math.trunc(mydata[5]);
+        mydata[6] = Math.trunc(mydata[6]);
+        mydata[7] = Math.trunc(mydata[7]*1.94384);
+		sendDataToMain(mydata);
       }
     });
   }
 };
 
 function sendDataToMain(data) {
-  ipcRenderer.send('channel-name', data);
+  ipcRenderer.send('XplaneData', data);
 }
