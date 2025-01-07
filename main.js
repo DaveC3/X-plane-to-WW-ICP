@@ -18,8 +18,8 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     minWidth: 400,
     minHeight: 400,
-    width: 400,
-    height: 400,
+    width: 700,
+    height: 768,
     backgroundColor: '#252526',
     icon: path.join(__dirname, 'www/logo', 'SimAppPro.png'),
     webPreferences: {
